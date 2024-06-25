@@ -40,3 +40,35 @@ white-space: nowrap; */
     display: none;
   }
 `;
+
+export const NavBtn = styled.nav`
+  display: flex;
+  align-items: center;
+  margin-right: 24px;
+  /* Third Nav */
+  /* justify-content: flex-end;
+  width: 100vw; */
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
+
+export const NavBtnLink = styled(Link)`
+  border-radius: 4px;
+  background: #568d33;
+  padding: 10px 22px;
+  color: #ffffff;
+  outline: none;
+  border: none;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  /* Second Nav */
+  margin-left: 24px;
+  &:hover {
+    transition: all 0.2s ease-in-out;
+    background: #406429;
+  }
+`;

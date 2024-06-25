@@ -1,20 +1,58 @@
-import React from 'react';
-import food from './food.png';
+import React from "react";
+import food from "./food.png";
+import { useNavigate } from "react-router-dom";
+import {
+  ClerkProvider,
+  SignedIn,
+  SignedOut,
+  SignInButton,
+} from "@clerk/clerk-react";
 
-const Home = () => {
+const VITE_CLERK_PUBLISHABLE_KEY =
+  "pk_test_cGVhY2VmdWwtd3Jlbi0xNC5jbGVyay5hY2NvdW50cy5kZXYk"; // Replace with your Clerk publishable key
+
+function Home() {
+  const navigate = useNavigate();
+
+  const journalPage = () => {
+    navigate("/journal");
+  };
+
+  const CustomButton = () => {
+    const handleSignIn = () => {
+      // You can perform additional actions here before signing in
+    };
+
+    return (
+      <SignInButton onClick={handleSignIn}>
+        <button className="start-btn">Make Your Food Journal!</button>
+      </SignInButton>
+    );
+  };
+
+
 
   return (
-    <div className="app">
-      <div className="row">
-        <img className="food" src={food} height={700} width={550} alt="food" />
-        <div className="col">
-          <h1 className="title">Foodie Journal</h1>
-          <button className='start-btn'>Make Your Food Journal!</button>
+    <ClerkProvider publishableKey={VITE_CLERK_PUBLISHABLE_KEY}>
+      <SignedIn>{journalPage}</SignedIn>
+      <div className="app">
+        <div className="row">
+          <img
+            className="food"
+            src={food}
+            height={600}
+            width={550}
+            alt="food"
+          />
+          <div className="col">
+            <h1 className="title">Foodie Journal</h1>
+            <CustomButton />
+          </div>
         </div>
       </div>
-    </div>
+      <SignedOut></SignedOut>
+    </ClerkProvider>
   );
-
 }
 
-export default Home
+export default Home;
