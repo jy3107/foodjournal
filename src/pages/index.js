@@ -1,12 +1,7 @@
 import React from "react";
 import food from "./food.png";
 import { useNavigate } from "react-router-dom";
-import {
-  ClerkProvider,
-  SignedIn,
-  SignedOut,
-  SignInButton,
-} from "@clerk/clerk-react";
+import { ClerkProvider, SignedIn, SignInButton } from "@clerk/clerk-react";
 
 const VITE_CLERK_PUBLISHABLE_KEY =
   "pk_test_cGVhY2VmdWwtd3Jlbi0xNC5jbGVyay5hY2NvdW50cy5kZXYk"; // Replace with your Clerk publishable key
@@ -20,21 +15,21 @@ function Home() {
 
   const CustomButton = () => {
     const handleSignIn = () => {
-      // You can perform additional actions here before signing in
+      // Optional: You can perform additional actions here before signing in
     };
 
     return (
-      <SignInButton onClick={handleSignIn}>
+      <SignInButton
+        onUserSignedIn={journalPage()} // Directly navigate to journalPage after sign-in
+        onClick={handleSignIn}
+      >
         <button className="start-btn">Make Your Food Journal!</button>
       </SignInButton>
     );
   };
 
-
-
   return (
     <ClerkProvider publishableKey={VITE_CLERK_PUBLISHABLE_KEY}>
-      <SignedIn>{journalPage}</SignedIn>
       <div className="app">
         <div className="row">
           <img
@@ -50,7 +45,6 @@ function Home() {
           </div>
         </div>
       </div>
-      <SignedOut></SignedOut>
     </ClerkProvider>
   );
 }
